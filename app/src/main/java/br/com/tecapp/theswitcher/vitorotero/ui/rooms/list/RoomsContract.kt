@@ -7,10 +7,13 @@ interface RoomsContract {
 
     interface View : BaseView {
         fun setRooms(rooms: List<Rooms>)
+        fun showEmptyView()
+        fun showMessageStatus(status: Boolean)
     }
 
     interface Presenter {
         fun getAllRooms()
+        fun updateRoom(room: Rooms)
     }
 
 }

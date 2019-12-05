@@ -43,6 +43,10 @@ class RoomsViewHolder(itemView: View, private val listener: RoomAdapterListener)
     fun bind(item: Rooms) {
         itemView.tvName.text = item.name
         itemView.swStatus.isChecked = item.status
+        itemView.swStatus.setOnCheckedChangeListener { _, isChecked ->
+            item.status = isChecked
+            listener.onStatusChange(item)
+        }
         itemView.clContent.setOnClickListener { listener.onItemClick(item) }
     }
 

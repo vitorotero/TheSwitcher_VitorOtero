@@ -8,6 +8,8 @@ import br.com.tecapp.theswitcher.vitorotero.R
 import br.com.tecapp.theswitcher.vitorotero.shared.interactor.RoomsInteractor
 import br.com.tecapp.theswitcher.vitorotero.shared.interactor.RoomsInteractorImp
 import br.com.tecapp.theswitcher.vitorotero.shared.model.Rooms
+import br.com.tecapp.theswitcher.vitorotero.shared.repository.SwitcherDatabase
+import br.com.tecapp.theswitcher.vitorotero.ui.rooms.detail.RoomsDetailActivity
 import br.com.tecapp.theswitcher.vitorotero.ui.rooms.list.adapter.RoomAdapter
 import br.com.tecapp.theswitcher.vitorotero.ui.rooms.list.adapter.RoomAdapterListener
 import kotlinx.android.synthetic.main.rooms_screen.*
@@ -27,6 +29,11 @@ class RoomsActivity : AppCompatActivity(), RoomsContract.View, RoomAdapterListen
         presenter?.getAllRooms()
     }
 
+    override fun showEmptyView() {
+        Toast.makeText(this, getString(R.string.rooms_list_empty_list), Toast.LENGTH_SHORT)
+            .show()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         presenter?.detachView()
@@ -37,15 +44,27 @@ class RoomsActivity : AppCompatActivity(), RoomsContract.View, RoomAdapterListen
     }
 
     override fun onItemClick(item: Rooms) {
-        Toast.makeText(this, item.name, Toast.LENGTH_SHORT)
-            .show()
+        startActivity(RoomsDetailActivity.getStartIntent(this, item))
     }
 
     override fun onStatusChange(item: Rooms) {
+        presenter?.updateRoom(item)
+    }
+
+    override fun showMessageStatus(status: Boolean) {
+        val message = if (status) {
+            getString(R.string.rooms_list_light_turn_on)
+        } else {
+            getString(R.string.rooms_list_light_turn_off)
+        }
+
+        Toast.makeText(this, message, Toast.LENGTH_SHORT)
+            .show()
     }
 
     private fun bindView() {
-        val interactor: RoomsInteractor = RoomsInteractorImp()
+        val database = SwitcherDatabase.getInstance(this)
+        val interactor: RoomsInteractor = RoomsInteractorImp(database.roomsDao())
         presenter = RoomsPresenter(interactor, this)
 
         adapter = RoomAdapter(this)

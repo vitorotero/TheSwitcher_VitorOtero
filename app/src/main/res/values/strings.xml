@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">TheSwitcher_VitorOtero</string>
+
+    <string name="light_on">ligada</string>
+    <string name="light_off">desligada</string>
+
+    <!-- Rooms List Activity -->
+    <string name="rooms_list_empty_list">Não há nada a exibir</string>
+    <string name="rooms_list_light_turn_on">A luz foi ligada</string>
+    <string name="rooms_list_light_turn_off">A luz foi desligada</string>
+    <!-- Rooms List Activity -->
+
+    <!-- Detail Rooms Activity -->
+    <string name="detail_room_message">A luz está %1s</string>
+    <!-- Detail Rooms Activity -->
+
 </resources>
