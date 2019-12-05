@@ -14,7 +14,7 @@ class RoomsPresenter(private val roomsInteractor: RoomsInteractor, view: RoomsCo
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    { rooms -> },
+                    { rooms -> view?.setRooms(rooms) },
                     { })
         )
     }

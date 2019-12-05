@@ -10,7 +10,7 @@ interface RoomsInteractor {
 class RoomsInteractorImp : RoomsInteractor {
 
     override fun getAllRooms(): Single<List<Rooms>> {
-        return Single.just(emptyList())
+        return Single.just(Rooms.generateBaseRooms())
     }
 
 }

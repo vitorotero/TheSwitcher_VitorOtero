@@ -3,5 +3,6 @@
 
     <dimen name="space_8">8dp</dimen>
     <dimen name="space_16">16dp</dimen>
+    <dimen name="divider_1">1dp</dimen>
 
 </resources>

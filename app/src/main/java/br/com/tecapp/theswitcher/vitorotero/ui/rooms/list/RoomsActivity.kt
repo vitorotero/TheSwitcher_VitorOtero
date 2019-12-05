@@ -1,6 +1,7 @@
 package br.com.tecapp.theswitcher.vitorotero.ui.rooms.list
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.tecapp.theswitcher.vitorotero.R
@@ -22,6 +23,8 @@ class RoomsActivity : AppCompatActivity(), RoomsContract.View, RoomAdapterListen
 
         bindView()
         setupView()
+
+        presenter?.getAllRooms()
     }
 
     override fun onDestroy() {
@@ -29,7 +32,16 @@ class RoomsActivity : AppCompatActivity(), RoomsContract.View, RoomAdapterListen
         presenter?.detachView()
     }
 
+    override fun setRooms(rooms: List<Rooms>) {
+        adapter.setList(rooms)
+    }
+
     override fun onItemClick(item: Rooms) {
+        Toast.makeText(this, item.name, Toast.LENGTH_SHORT)
+            .show()
+    }
+
+    override fun onStatusChange(item: Rooms) {
     }
 
     private fun bindView() {

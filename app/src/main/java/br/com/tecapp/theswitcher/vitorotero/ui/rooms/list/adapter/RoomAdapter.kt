@@ -6,15 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.tecapp.theswitcher.vitorotero.R
 import br.com.tecapp.theswitcher.vitorotero.shared.model.Rooms
+import kotlinx.android.synthetic.main.rooms_list_item.view.*
 
 interface RoomAdapterListener {
     fun onItemClick(item: Rooms)
+    fun onStatusChange(item: Rooms)
 }
 
 class RoomAdapter(private val listener: RoomAdapterListener) :
     RecyclerView.Adapter<RoomsViewHolder>() {
 
-    private val rooms: List<Rooms> = emptyList()
+    private var rooms: List<Rooms> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomsViewHolder {
         val view =
@@ -28,13 +30,20 @@ class RoomAdapter(private val listener: RoomAdapterListener) :
         holder.bind(rooms[position])
     }
 
+    fun setList(items: List<Rooms>) {
+        this.rooms = items
+        notifyDataSetChanged()
+    }
+
 }
 
 class RoomsViewHolder(itemView: View, private val listener: RoomAdapterListener) :
     RecyclerView.ViewHolder(itemView) {
 
     fun bind(item: Rooms) {
-
+        itemView.tvName.text = item.name
+        itemView.swStatus.isChecked = item.status
+        itemView.clContent.setOnClickListener { listener.onItemClick(item) }
     }
 
 }
