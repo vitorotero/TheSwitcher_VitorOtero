@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="divider_1">1dp</dimen>
+
     <dimen name="space_8">8dp</dimen>
     <dimen name="space_16">16dp</dimen>
-    <dimen name="divider_1">1dp</dimen>
+
+    <dimen name="text_18">18sp</dimen>
+    <dimen name="text_24">24sp</dimen>
+
+    <!-- Detail Rooms Activity -->
+    <dimen name="rooms_details_iv_lamp_height">250dp</dimen>
+    <!-- Detail Rooms Activity -->
 
 </resources>

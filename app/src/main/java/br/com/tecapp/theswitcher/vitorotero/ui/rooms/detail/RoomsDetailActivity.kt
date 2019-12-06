@@ -21,13 +21,16 @@ class RoomsDetailActivity : AppCompatActivity(), RoomsDetailContract.View {
     }
 
     override fun showRoomSelected(room: Rooms) {
-        val text = if (room.status) {
-            getString(R.string.light_on)
-        } else {
-            getString(R.string.light_off)
-        }
+        title = room.name
 
-        tvMessage.text = getString(R.string.detail_room_message, text)
+        ivLamp.setImageResource(R.drawable.ic_lamp_on)
+        tvMessage.text = getString(R.string.detail_room_message, room.name)
+        tvStatus.text = getString(R.string.light_on)
+
+        if (!room.status) {
+            tvStatus.text = getString(R.string.light_off)
+            ivLamp.setImageResource(R.drawable.ic_lamp_off)
+        }
     }
 
     override fun onBackPressed() {
